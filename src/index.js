@@ -53,6 +53,11 @@ navItems.forEach((navItem) => {
 });
 
 const drinksList = document.querySelector('.drinks-list');
-drinks.forEach((drink) => {
-  drinksList.appendChild(Drink(drink));
-});
+
+fetch('https://apps.kodim.cz/daweb/cafelora/api/drinks')
+  .then((response) => response.json())
+  .then((json) => {
+    json.forEach((drink) => {
+      drinksList.appendChild(Drink(drink));
+    });
+  });
