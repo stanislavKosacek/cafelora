@@ -1,4 +1,5 @@
 import { Layer } from './Layer/index';
+import { Drink } from './Drink/index';
 import './style.css';
 
 const layers = [
@@ -48,3 +49,22 @@ const drinkInfoElm = document.querySelector('.drink__info');
 layers.forEach((layer) => {
   drinkInfoElm.innerHTML += Layer(layer);
 });
+
+const drinksList = document.querySelector('.drinks-list');
+drinksList.appendChild(
+  Drink({
+    id: 'romano',
+    name: 'Romano',
+    ordered: false,
+    layers: [
+      {
+        color: '#fbdf5b',
+        label: 'citrón',
+      },
+      {
+        color: '#613916',
+        label: 'espresso',
+      },
+    ],
+  }),
+);
