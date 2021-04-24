@@ -1,19 +1,40 @@
-import { Layer } from './Layer/index';
 import { Drink } from './Drink/index';
 import './style.css';
 
-const layers = [
+const drinks = [
   {
-    color: '#feeeca',
-    label: 'mléčná pěna',
+    id: 'cappuccino',
+    name: 'Cappuccino',
+    ordered: false,
+    layers: [
+      {
+        color: '#feeeca',
+        label: 'mléčná pěna',
+      },
+      {
+        color: '#fed7b0',
+        label: 'teplé mléko',
+      },
+      {
+        color: '#613916',
+        label: 'espresso',
+      },
+    ],
   },
   {
-    color: '#fed7b0',
-    label: 'teplé mléko',
-  },
-  {
-    color: '#613916',
-    label: 'espresso',
+    id: 'romano',
+    name: 'Romano',
+    ordered: false,
+    layers: [
+      {
+        color: '#fbdf5b',
+        label: 'citrón',
+      },
+      {
+        color: '#613916',
+        label: 'espresso',
+      },
+    ],
   },
 ];
 
@@ -31,40 +52,7 @@ navItems.forEach((navItem) => {
   });
 });
 
-document.querySelector('.order-btn').addEventListener('click', () => {
-  const drinkCup = document.querySelector('.drink__cup');
-  const drinkBtn = document.querySelector('.order-btn');
-
-  if (!drinkCup.classList.contains('drink__cup--selected')) {
-    drinkCup.classList.add('drink__cup--selected');
-    drinkBtn.textContent = 'Zrušit';
-  } else {
-    drinkCup.classList.remove('drink__cup--selected');
-    drinkBtn.textContent = 'Objednat';
-  }
-});
-
-const drinkInfoElm = document.querySelector('.drink__info');
-
-layers.forEach((layer) => {
-  drinkInfoElm.innerHTML += Layer(layer);
-});
-
 const drinksList = document.querySelector('.drinks-list');
-drinksList.appendChild(
-  Drink({
-    id: 'romano',
-    name: 'Romano',
-    ordered: false,
-    layers: [
-      {
-        color: '#fbdf5b',
-        label: 'citrón',
-      },
-      {
-        color: '#613916',
-        label: 'espresso',
-      },
-    ],
-  }),
-);
+drinks.forEach((drink) => {
+  drinksList.appendChild(Drink(drink));
+});
