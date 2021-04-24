@@ -1,41 +1,50 @@
-import { Layer } from './Layer';
+import { Layer } from './Layer/index';
 import './style.css';
 
-const navElm = document.querySelector('nav');
+const layers = [
+  {
+    color: '#feeeca',
+    label: 'mléčná pěna',
+  },
+  {
+    color: '#fed7b0',
+    label: 'teplé mléko',
+  },
+  {
+    color: '#613916',
+    label: 'espresso',
+  },
+];
+
+const nav = document.querySelector('nav');
 
 document.querySelector('#nav-btn').addEventListener('click', () => {
-  navElm.classList.toggle('nav-closed');
+  nav.classList.toggle('nav-closed');
 });
 
-const navItems = navElm.querySelectorAll('a');
+const navItems = nav.querySelectorAll('a');
 
 navItems.forEach((navItem) => {
   navItem.addEventListener('click', () => {
-    navElm.classList.add('nav-closed');
+    nav.classList.add('nav-closed');
   });
 });
 
-document.querySelector('.order-btn').addEventListener('click', (e) => {
-  const drinkCupElm = document.querySelector('.drink__cup');
-  if (!drinkCupElm.classList.contains('drink__cup--selected')) {
-    drinkCupElm.classList.add('drink__cup--selected');
-    e.target.textContent = 'Zrušit';
+document.querySelector('.order-btn').addEventListener('click', () => {
+  const drinkCup = document.querySelector('.drink__cup');
+  const drinkBtn = document.querySelector('.order-btn');
+
+  if (!drinkCup.classList.contains('drink__cup--selected')) {
+    drinkCup.classList.add('drink__cup--selected');
+    drinkBtn.textContent = 'Zrušit';
   } else {
-    drinkCupElm.classList.remove('drink__cup--selected');
-    e.target.textContent = 'Objednat';
+    drinkCup.classList.remove('drink__cup--selected');
+    drinkBtn.textContent = 'Objednat';
   }
 });
 
-const drinkInfo = document.querySelector('.drink__info');
-drinkInfo.innerHTML += Layer({
-  color: '#feeeca',
-  label: 'mléčná pěna',
-});
-drinkInfo.innerHTML += Layer({
-  color: '#fed7b0',
-  label: 'teplé mléko',
-});
-drinkInfo.innerHTML += Layer({
-  color: '#613916',
-  label: 'espresso',
+const drinkInfoElm = document.querySelector('.drink__info');
+
+layers.forEach((layer) => {
+  drinkInfoElm.innerHTML += Layer(layer);
 });
